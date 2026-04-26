@@ -91,6 +91,8 @@ public class ConsoleApp {
 
     private void adminMenu(int userId) {
         while (true) {
+            System.out.println("ADMIN MENY:");
+            System.out.println("Vad vill du göra?");
             System.out.println("1. Se alla notes");
             System.out.println("2. Radera note");
             System.out.println("3. Logga ut");

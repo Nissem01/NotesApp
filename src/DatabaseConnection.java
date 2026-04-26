@@ -9,7 +9,7 @@ public class DatabaseConnection {
 
     static {
         try {
-            FileInputStream input = new FileInputStream("config.properties");
+            FileInputStream input = new FileInputStream("src/config.properties");
             config.load(input);
         } catch (Exception e) {
             System.out.println("Kunde inte läsa config!");
