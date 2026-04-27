@@ -18,11 +18,12 @@ public class UserUtilities {
 
             String hashedPassword = PasswordUtilities.hashPassword(password);
 
-            String sqlInsert = "INSERT INTO USERS (USERNAME, PASSWORD) VALUES (?, ?)";
+            String sqlInsert = "INSERT INTO USERS (USERNAME, PASSWORD, ROLE) VALUES (?, ?,?)";
             PreparedStatement statement = conn.prepareStatement(sqlInsert);
 
             statement.setString(1, username);
             statement.setString(2, hashedPassword);
+            statement.setString(3, "USER");
 
             statement.executeUpdate();
 
@@ -63,7 +64,7 @@ public class UserUtilities {
 
             String hashedPassword = PasswordUtilities.hashPassword(newPassword);
 
-            String sqlUpdate = "UPDATE users SET PASSWORD = ? WHERE username = ?";
+            String sqlUpdate = "UPDATE users SET PASSWORD = ? WHERE id = ?";
             PreparedStatement statement = conn.prepareStatement(sqlUpdate);
 
             statement.setString(1, hashedPassword);

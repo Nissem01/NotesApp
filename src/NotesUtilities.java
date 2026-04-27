@@ -22,15 +22,27 @@ public class NotesUtilities {
     public static void showNotes(int userId){
         try(Connection conn = DatabaseConnection.connect()){
 
-            String sqlSelect = "SELECT * FROM notes WHERE user_id = ?";
+            String sqlSelect = "SELECT id, content FROM notes WHERE user_id = ?";
             PreparedStatement statement = conn.prepareStatement(sqlSelect);
 
             statement.setInt(1,userId);
 
             ResultSet rs = statement.executeQuery();
 
+            System.out.println("Dina notes:");
+
+            boolean hasNotes = false;
+
             while (rs.next()){
-                System.out.println("Note: " + rs.getString("content"));
+                hasNotes = true;
+                int id = rs.getInt("id");
+                String content = rs.getString("content");
+
+                System.out.println("Note " + id + ": " + content);
+            }
+
+            if(!hasNotes){
+                System.out.println("Du har inga notes.");
             }
 
         }catch (Exception e){
@@ -47,9 +59,13 @@ public class NotesUtilities {
             statement.setInt(1, noteId);
             statement.setInt(2, userId);
 
-            statement.executeUpdate();
+            int rowsChanged = statement.executeUpdate();
 
-            System.out.println("Note raderad!");
+            if (rowsChanged > 0) {
+                System.out.println("Note raderad!");
+            } else {
+                System.out.println("Ingen note hittades");
+            }
 
         } catch (Exception e) {
             System.out.println("Kunde inte radera note.");
@@ -66,16 +82,20 @@ public class NotesUtilities {
             statement.setInt(2, noteId);
             statement.setInt(3, userId);
 
-            statement.executeUpdate();
+            int rowsChanged = statement.executeUpdate();
 
-            System.out.println("Note uppdaterad!");
+            if (rowsChanged > 0) {
+                System.out.println("Note uppdaterad");
+            } else {
+                System.out.println("Ingen note hittades med matchande ID.");
+            }
 
         } catch (Exception e) {
             System.out.println("Kunde inte uppdatera note.");
         }
     }
 
-    public static void showAllNotes() {
+    public static void showAllUserNotes() {
         try (Connection conn = DatabaseConnection.connect()) {
 
             String sqlSelect = "SELECT users.username, notes.content FROM notes JOIN users ON notes.user_id = users.id";
