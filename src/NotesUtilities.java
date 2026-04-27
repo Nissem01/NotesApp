@@ -38,7 +38,7 @@ public class NotesUtilities {
                 int id = rs.getInt("id");
                 String content = rs.getString("content");
 
-                System.out.println("Note " + id + ": " + content);
+                System.out.println("Note ID " + id + ": " + content);
             }
 
             if(!hasNotes){
@@ -98,13 +98,28 @@ public class NotesUtilities {
     public static void showAllUserNotes() {
         try (Connection conn = DatabaseConnection.connect()) {
 
-            String sqlSelect = "SELECT users.username, notes.content FROM notes JOIN users ON notes.user_id = users.id";
-            PreparedStatement statement = conn.prepareStatement(sqlSelect);
+            String sqlSelect = "SELECT notes.id, users.username, notes.content " + "FROM notes JOIN users ON notes.user_id = users.id";
 
+            PreparedStatement statement = conn.prepareStatement(sqlSelect);
             ResultSet rs = statement.executeQuery();
 
+            System.out.println("Alla notes i systemet:");
+
+            boolean hasNotes = false;
+
+
             while (rs.next()) {
-                System.out.println(rs.getString("username") + ": " + rs.getString("content"));
+                hasNotes = true;
+
+                int id = rs.getInt("id");
+                String username = rs.getString("username");
+                String content = rs.getString("content");
+
+                System.out.println("Note ID " + id + ": " + username + ": " + content);
+            }
+
+            if (!hasNotes){
+                System.out.println("Inga notes finns i systemet");
             }
 
         } catch (Exception e) {
@@ -119,10 +134,13 @@ public class NotesUtilities {
             PreparedStatement statement = conn.prepareStatement(sql);
 
             statement.setInt(1, noteId);
-            statement.executeUpdate();
+            int rowsChanged = statement.executeUpdate();
 
-            System.out.println("Note raderad av admin.");
-
+            if (rowsChanged > 0) {
+                System.out.println("Note raderad av admin.");
+            } else {
+                System.out.println("Ingen note hittades med det ID:t.");
+            }
         } catch (Exception e) {
             System.out.println("Fel vid radering.");
         }

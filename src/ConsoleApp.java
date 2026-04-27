@@ -131,6 +131,7 @@ public class ConsoleApp {
                     NotesUtilities.showAllUserNotes();
                     break;
                 case 2:
+                    NotesUtilities.showAllUserNotes();
                     System.out.println("Ange note ID:");
                     int id = input.nextInt();
                     input.nextLine();
