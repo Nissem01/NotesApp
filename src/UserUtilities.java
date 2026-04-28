@@ -11,6 +11,11 @@ public class UserUtilities {
 
             ResultSet rs = checkStatement.executeQuery();
 
+            if (username.isEmpty() || password.isEmpty()) {
+                System.out.println("Username och lösenord får inte vara tomma.");
+                return;
+            }
+
             if (rs.next()) {
                 System.out.println("Användarnamnet finns redan");
                 return;
@@ -30,7 +35,7 @@ public class UserUtilities {
             System.out.println("Ny användare har registreras");
 
         } catch (Exception e){
-            System.out.println("Error! Kunde inte registrera användare.");
+            System.out.println("Något gick fel vid registrering. Försök igen.");
         }
     }
 

@@ -11,6 +11,11 @@ public class ConsoleApp {
             System.out.println("2. Logga in");
             System.out.println("3. Exit");
 
+            if (!input.hasNextInt()) {
+                System.out.println("Du måste skriva en siffra.");
+                input.nextLine();
+                continue;
+            }
             int choice = input.nextInt();
             input.nextLine();
 
@@ -63,6 +68,7 @@ public class ConsoleApp {
 
     private void userMenu(int userId) {
         while (true) {
+            System.out.println("USER MENY:");
             System.out.println("Vad vill du göra?");
             System.out.println("1. Skapa note");
             System.out.println("2. Visa notes");
@@ -71,6 +77,11 @@ public class ConsoleApp {
             System.out.println("5. Ändra lösenord");
             System.out.println("6. Logga ut");
 
+            if (!input.hasNextInt()) {
+                System.out.println("Du måste skriva en siffra.");
+                input.nextLine();
+                continue;
+            }
             int choice = input.nextInt();
             input.nextLine();
 
@@ -123,6 +134,11 @@ public class ConsoleApp {
             System.out.println("2. Radera note");
             System.out.println("3. Logga ut");
 
+            if (!input.hasNextInt()) {
+                System.out.println("Du måste skriva en siffra.");
+                input.nextLine();
+                continue;
+            }
             int choice = input.nextInt();
             input.nextLine();
 
