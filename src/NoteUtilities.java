@@ -1,6 +1,6 @@
 import java.sql.*;
 
-public class NotesUtilities {
+public class NoteUtilities {
 
     public static void createNote(int userId, String content){
         try(Connection conn = DatabaseConnection.connect()){

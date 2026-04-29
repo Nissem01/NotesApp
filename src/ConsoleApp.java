@@ -89,13 +89,13 @@ public class ConsoleApp {
                 case 1:
                     System.out.println("Skriv din note:");
                     String content = input.nextLine();
-                    NotesUtilities.createNote(userId, content);
+                    NoteUtilities.createNote(userId, content);
                     break;
                 case 2:
-                    NotesUtilities.showNotes(userId);
+                    NoteUtilities.showNotes(userId);
                     break;
                 case 3:
-                    NotesUtilities.showNotes(userId);
+                    NoteUtilities.showNotes(userId);
                     System.out.println("Ange note ID du vill ändra:");
                     int updateId = input.nextInt();
                     input.nextLine();
@@ -103,15 +103,15 @@ public class ConsoleApp {
                     System.out.println("Ny text:");
                     String newContent = input.nextLine();
 
-                    NotesUtilities.updateNote(updateId, userId, newContent);
+                    NoteUtilities.updateNote(updateId, userId, newContent);
                     break;
                 case 4:
-                    NotesUtilities.showNotes(userId);
+                    NoteUtilities.showNotes(userId);
                     System.out.println("Ange note ID du vill ta bort:");
                     int deleteId = input.nextInt();
                     input.nextLine();
 
-                    NotesUtilities.deleteNote(deleteId, userId);
+                    NoteUtilities.deleteNote(deleteId, userId);
                     break;
                 case 5:
                     System.out.println("Nytt lösenord:");
@@ -144,15 +144,15 @@ public class ConsoleApp {
 
             switch (choice) {
                 case 1:
-                    NotesUtilities.showAllUserNotes();
+                    NoteUtilities.showAllUserNotes();
                     break;
                 case 2:
-                    NotesUtilities.showAllUserNotes();
+                    NoteUtilities.showAllUserNotes();
                     System.out.println("Ange note ID:");
                     int id = input.nextInt();
                     input.nextLine();
 
-                    NotesUtilities.adminDeleteNote(id);
+                    NoteUtilities.adminDeleteNote(id);
                     break;
                 case 3:
                     return;
